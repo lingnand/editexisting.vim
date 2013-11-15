@@ -44,7 +44,7 @@ func s:EditElsewhere(filename)
                 call system("wmctrl -a \"`wtitle " . pid . "`\"")
             endif
             " foreground
-            "call remote_expr(servername, "foreground()")
+            call remote_expr(servername, "foreground()")
 
             if remote_expr(servername, "exists('*EditExisting')")
                 " Make sure the file is visible in a window (not hidden).
