@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# run within a tmux session to find the current window id
+tmux_id="${TMUX##*,}"
+# echo "id is $tmux_id"
+tmux list-sessions -F '#{session_id} #{session_name}' | grep -m1 "^\$$tmux_id" | awk '{$1="^tmux new-session -s";print}' | (pgrep -f "`cat`")
