@@ -38,10 +38,11 @@ func s:EditElsewhere(filename)
                 call remote_foreground(servername)
             else
                 " we should instead try to call wmctrl to bring that window to the
-                let pid = remote_expr(servername, "getpid()")
-                "echomsg "pid found is " . pid
-                " execute the wmctrl command
-                call system("wmctrl -a \"`wtitle " . pid . "`\"")
+                " OLD way: using pid
+                " let pid = remote_expr(servername, "getpid()")
+                " NEW way: using tmuxn-pid to get the pid
+                let pid = remote_expr(servername, "system('tmuxn-pid')")
+                call system("xfocus " . pid )
             endif
             " foreground
             call remote_expr(servername, "foreground()")
